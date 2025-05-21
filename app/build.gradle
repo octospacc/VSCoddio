@@ -1,0 +1,34 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'org.eu.octt.vscoddio'
+    defaultConfig {
+        applicationId 'org.eu.octt.vscoddio'
+        versionCode 1
+        versionName '1.0'
+        minSdk 1
+        //noinspection OldTargetApi
+        targetSdk 34
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.dbg'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileSdk 34
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}

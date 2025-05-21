@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_app">Informazioni App</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="exit">Esci</string>
+    <string name="cancel">Cancel</string>
+    <string name="hide">Nascondi</string>
+    <string name="add">Aggiungi</string>
+    <string name="remove">Rimuovi</string>
+    <string name="move_app_data">Sposta Dati App</string>
+    <string name="move_app_data_info">La app è stata trasferita su una diversa locazione di archiviazione. I dati saranno spostati ora.</string>
+    <string name="loading">Caricamento</string>
+    <string name="reload">Ricarica</string>
+    <string name="stop_loading">Ferma Caricamento</string>
+    <string name="backwards">Indietro</string>
+    <string name="forward">Avanti</string>
+    <string name="open">Apri</string>
+    <string name="open_externally">Apri Esternamente</string>
+    <string name="copy_url">Copia URL</string>
+    <string name="execute_javascript">Esegui JavaScript</string>
+</resources>
