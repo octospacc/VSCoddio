@@ -26,17 +26,7 @@ import org.eu.spacc.spaccdotweb.android.webview.SpaccWebViewClient;
 public class MainActivity extends SpaccWebViewActivity {
     private ActionBar actionBar = null;
     private Menu menu = null;
-    // private int selectedPage = 0;
-    // private int lastSelectedPage = 0;
-    // private boolean clickedMetaButton = false;
-    private long pageStartTime = 0;
     SharedPrefHelper sharedPref;
-    // private Boolean justStarted = true;
-
-//    private void restorePagesMenu() {
-//         clickedMetaButton = false;
-//         actionBar.setSelectedNavigationItem(lastSelectedPage);
-//    }
 
     private ArrayList<String> getPagesList(boolean listFallback) {
         ArrayList<String> pages = sharedPref.getStringList("pages");
@@ -58,20 +48,7 @@ public class MainActivity extends SpaccWebViewActivity {
     private void setupPagesMenu(boolean listFallback) {
         if (actionBar != null) {
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-            // SharedPrefHelper sharedPref = new SharedPrefHelper(getApplicationContext(), "VSCoddio");
-//            ArrayList<String> pages;
-//            try {
-//                pages = sharedPref.getStringList("pages");
-//            } catch (JSONException e) {
-//                throw new RuntimeException(e);
-//            }
-//            if (pages == null) {
-//                pages = new ArrayList<String>(Arrays.asList("https://vscode.dev", "http://localhost:8080"));
-//            }
             ArrayList<String> pages = getPagesList(listFallback);
-            //pages.add(getResources().getString(R.string.add));
-//            ArrayList<String> finalPages = pages;
-//            int addButtonPos = finalPages.size() - 1;
             if (pages.isEmpty()) {
                 resetWebView();
             }
@@ -79,29 +56,6 @@ public class MainActivity extends SpaccWebViewActivity {
                 menu.findItem(R.id.remove).setEnabled(!pages.isEmpty());
             }
             actionBar.setListNavigationCallbacks(new ArrayAdapter<>(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH ? actionBar.getThemedContext() : getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pages), (pos, id) -> {
-//                selectedPage = pos;
-//                if (pos == addButtonPos) {
-//                    clickedMetaButton = true;
-//                    actionBar.setSelectedNavigationItem(lastSelectedPage);
-//                    EditText urlText = new EditText(MainActivity.this);
-//                    new AlertDialog.Builder(MainActivity.this)
-//                        .setTitle(getResources().getString(R.string.add))
-//                        .setView(urlText)
-//                        .setOnCancelListener(dialogInterface -> restorePagesMenu())
-//                        .setPositiveButton("OK", (dialogInterface, i) -> {
-//                            urlText.getText().toString();
-//                            sharedPref.setStringList("pages", finalPages);
-//                            setupPagesMenu();
-//                        })
-//                        .setNeutralButton(R.string.cancel, (dialogInterface, i) -> restorePagesMenu())
-//                        .show();
-                    //return false;
-//                } else if (!clickedMetaButton) {
-                    //webView.loadUrl(finalPages.get(pos));
-//                    lastSelectedPage = pos;
-//                    //return true;
-//                }
-                //lastSelectedPage = pos;
                 if (pos != 0) {
                     Collections.swap(pages, 0, pos);
                     sharedPref.setStringList("pages", pages);
@@ -195,7 +149,6 @@ public class MainActivity extends SpaccWebViewActivity {
                     .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                         pages.remove(0);
                         sharedPref.setStringList("pages", pages);
-                        //selectedPage = 0;
                         setupPagesMenu(false);
                     })
                     .setNegativeButton(R.string.no, (dialogInterface, i) -> {})
@@ -233,11 +186,6 @@ public class MainActivity extends SpaccWebViewActivity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onBackPressed() {
-//        if (actionBar != null && !actionBar.isShowing()) {
-//            actionBar.show();
-//        } else {
-//            super.onBackPressed();
-//        }
         if (actionBar == null) {
             super.onBackPressed();
         } else if (actionBar.isShowing()) {
