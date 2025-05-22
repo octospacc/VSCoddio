@@ -24,7 +24,7 @@ jobs:
         run: |
           echo "${{ secrets.KEYSTORE_FILE }}" | base64 -d > release.keystore
           echo "${{ secrets.KEYSTORE_DATA }}" | base64 -d > keystore.properties
-          echo "storeFile=../release.keystore" >> keystore.properties
+          echo "storeFile=../release.keystore" > local.properties
 
       - name: Build signed APK
         run: sh ./gradlew assembleRelease

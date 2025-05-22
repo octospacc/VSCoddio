@@ -11,13 +11,16 @@ android {
         minSdk 1
         //noinspection OldTargetApi
         targetSdk 34
+        compileSdk 34
     }
 
     signingConfigs {
         release {
+            def Properties localProps = new Properties()
             def Properties keyProps = new Properties()
+            localProps.load(new FileInputStream(file('../local.properties')))
             keyProps.load(new FileInputStream(file('../keystore.properties')))
-            storeFile file(keyProps["storeFile"])
+            storeFile file(localProps["storeFile"])
             storePassword keyProps["storePassword"]
             keyPassword keyProps["keyPassword"]
             keyAlias keyProps["keyAlias"]
@@ -35,8 +38,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-    compileSdk 34
 }
 
 java {
