@@ -93,7 +93,11 @@ public class SpaccWebView extends WebView {
 
     public void injectScript(String script) {
         if (isLoaded) {
-            this.evaluateJavascript(script, null);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                this.evaluateJavascript(script, null);
+            } else {
+                this.loadUrl("javascript:(function(){" + script + "})();");
+            }
         } else {
             scriptQueue.add(script);
         }
@@ -105,7 +109,9 @@ public class SpaccWebView extends WebView {
 
     protected void setLoaded(Boolean loaded) {
         if (isLoaded = loaded) {
-            scriptQueue.forEach(this::injectScript);
+            for (String script : scriptQueue) {
+                injectScript(script);
+            }
             scriptQueue.clear();
         }
     }

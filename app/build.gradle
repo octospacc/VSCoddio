@@ -13,6 +13,17 @@ android {
         targetSdk 34
     }
 
+    signingConfigs {
+        release {
+            def Properties keyProps = new Properties()
+            keyProps.load(new FileInputStream(file('../keystore.properties')))
+            storeFile file(keyProps["storeFile"])
+            storePassword keyProps["storePassword"]
+            keyPassword keyProps["keyPassword"]
+            keyAlias keyProps["keyAlias"]
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix '.dbg'
@@ -20,7 +31,8 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            signingConfig signingConfigs.debug
+            //signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 

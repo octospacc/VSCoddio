@@ -23,6 +23,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:hasFragileUserData="true"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:hasCode="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="34">

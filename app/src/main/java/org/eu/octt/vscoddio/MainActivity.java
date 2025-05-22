@@ -88,7 +88,6 @@ public class MainActivity extends SpaccWebViewActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                pageStartTime = System.currentTimeMillis();
                 if (menu != null) {
                     menu.findItem(R.id.stop).setVisible(true);
                     menu.findItem(R.id.reload).setVisible(false);
@@ -123,10 +122,11 @@ public class MainActivity extends SpaccWebViewActivity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ArrayList<String> pages = getPagesList(false);
+        ArrayList<String> pages = getPagesList(true);
         switch (item.getItemId()) {
             case R.id.add:
                 EditText urlText = new EditText(this);
+                urlText.setSingleLine(true);
                 urlText.setHint("URL");
                 new AlertDialog.Builder(this)
                     .setTitle(getResources().getString(R.string.add))

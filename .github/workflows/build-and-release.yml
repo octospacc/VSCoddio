@@ -1,4 +1,3 @@
-# .github/workflows/build-and-release.yml
 name: Build & Release Signed APK
 
 on:
@@ -23,15 +22,12 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          echo "${{ secrets.SIGNING_KEYSTORE_BASE64 }}" | base64 -d > release.keystore
-          echo "SIGNING_STORE_FILE=$GITHUB_WORKSPACE/release.keystore" >> $GITHUB_ENV
+          echo "${{ secrets.KEYSTORE_FILE }}" | base64 -d > release.keystore
+          echo "${{ secrets.KEYSTORE_DATA }}" | base64 -d > keystore.properties
+          echo "storeFile=../release.keystore" >> keystore.properties
 
       - name: Build signed APK
-        env:
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        run: ./gradlew assembleRelease
+        run: sh ./gradlew assembleRelease
 
       - name: Upload APK to GitHub Release
         uses: softprops/action-gh-release@v1
