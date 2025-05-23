@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-    <AppIndex name="app_index">local</AppIndex>
+    <AppIndex name="app_index">remote</AppIndex>
 </config>
